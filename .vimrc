@@ -1,69 +1,103 @@
-""" Basic Stuff
-
-set nocompatible "Not entirely sure what this does, but seen it about in other examples
-"You don't need a colour scheme, but I like this one :)
-colorscheme evening
-
-"Turn on syntax highlighting and smart-indent
-syntax on
-set smartindent
-
-"Show the status line and suler
-set statusline=[%02n]\ %f\ %(\[%M%R%H]%)%=\ %4l,%02c%2V\ %P%* 
-set laststatus=2
-
-set ruler
+set nocompatible
+syntax enable
+colorscheme molokai
 
 "Get rid of tabs, they're the devils work
 set autoindent
 set expandtab
 set smarttab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 "set title to show in console title bar
 set title
 "Do not keep a backup file!
 set nobackup
 
-""" Indents for diff files
-"For some things I personally prefer a 2 space indent instead of 4
-autocmd BufRead,BufNewFile *.xml  set tabstop=2
-autocmd BufRead,BufNewFile *.xml  set shiftwidth=2
-autocmd BufRead,BufNewFile *.json  set tabstop=2
-autocmd BufRead,BufNewFile *.json  set shiftwidth=2
-autocmd BufRead,BufNewFile *.css  set tabstop=2
-autocmd BufRead,BufNewFile *.css  set shiftwidth=2
+set cindent
 
-""" Misc
-"Auto change the directory to the current file location
-autocmd BufEnter * lcd %:p:h
+set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 
-"When saving a bash file, automatically have it set itself as executable
-au bufwritepost * if getline(1) =~ "^#!" | if getline(1) =~ "/bin/" | silent !chmod a+x <afile> | endif | endif
+set nu
 
-"remap the esc key to a double press of the semi-colon
-ino ;; <esc> 
-cno ;; <c-c>
+set ruler     
+set showcmd 
 
-"Set my cusom shortcut key
-let mapleader=","
+if &term=="xterm"
+	set t_Co=8
+	set t_Sb=^[[4%dm
+	set t_Sf=^[[3%dm
+endif
 
-"Use ,s to start a spell check, hit it again to stop
-nmap <leader>s :setlocal spell! spelllang=en_gb<CR>
-set spellfile=~/.vim/dict.add
-set pastetoggle=<F2>
+nmap <F12> :NERDTree  <CR>
 
-"Set up window/splits key mapping for ease of use
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+" autocmd VimEnter * NERDTree 
+let NERDTreeShowBookmarks=1
+let NERDTreeChDirMode=2
 
-"set up search
+nmap <F4> :Tlist <CR>
+
+let Tlist_Show_One_File = 1
+let Tlist_Exit_OnlyWindow = 1
+let Tlist_Use_Right_Window = 1
+
 set hlsearch
+set nobackup
+set nowb
+set noswapfile
+
+set magic
+
+set hid
 set incsearch
 set ignorecase
 set smartcase
 
-nmap <silent> <c-N> :silent noh<CR>
+set mouse=a
+
+source $VIMRUNTIME/mswin.vim
+behave mswin
+
+execute pathogen#infect()
+
+:nmap \l :setlocal number!<CR>
+:nmap \o :set paste!<CR>
+:nmap j gj
+:nmap k gk
+:nmap \q :nohlsearch<CR>
+:nmap <C-e> :e#<CR>
+
+if $TERM == "xterm-256color" || $TERM == "screen-256color" || $COLORTERM == "gnome-terminal"
+  set t_Co=256
+endif
+
+let g:vim_markdown_folding_disabled=1
+set clipboard=unnamed
+
+set listchars=tab:»■,trail:■
+set list
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+"Disable the arrow keys
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
+
+"Move Between Splits Easily
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+"Open new split panes to right and bottom
+set splitbelow
+set splitright
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 0
+"let g:syntastic_check_on_wq = 1
