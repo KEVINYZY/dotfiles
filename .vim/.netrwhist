@@ -1,0 +1,6 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_1='/home/ruanyf/project/untco/tags/0.2'
+let g:netrw_dirhist_2='/var/www/mediawiki'
+let g:netrw_dirhist_3='/home/ruanyf/project/google_calendar_lite'
+let g:netrw_dirhist_4='/home/ruanyf/project/jstutorial/_layouts'

@@ -1,0 +1,2 @@
+rainbow_parenthsis-4.0.vba: call delete('/home/ruanyf/.vim/autoload/rainbow_parenthsis.vim')|call delete('/home/ruanyf/.vim/doc/rainbow_parenthsis.txt')|call delete('/home/ruanyf/.vim/plugin/rainbow_parenthsis.vim')|call delete('/home/ruanyf/.vim/rainbow_parenthsis_options.vim')
+markdown-1.2.2.vba: call delete('/home/ruanyf/.vim/ftdetect/markdown.vim')|call delete('/home/ruanyf/.vim/snippets/markdown.snippets')|call delete('/home/ruanyf/.vim/syntax/markdown.vim')
