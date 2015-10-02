@@ -122,7 +122,7 @@ alias ni="source ~/.nvm/nvm.sh && nvm use iojs"
 alias tf="synclient TouchpadOff=1"
 alias to="synclient TouchpadOff=0"
 alias s="ssh -D 7070 dpat.net"
-alias s1="ssh -D 7070 -p 16919 104.236.182.164"
+alias s1="ssh -D 7070 ruanyfv2"
 f
 
 echo "Command Alias List"
@@ -134,17 +134,23 @@ printf "(to)\t%s\n" "Enable the touchpad"
 printf "(s)\t%s\n" "SSH"
 printf "\n"
 
-export PS1="\[\e[01;34m\]\A\[\e[0m\]\[\e[00;37m\] [\[\e[0m\]\[\e[01;35m\]\u@\h\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[01;36m\]\w\[\e[0m\]\[\e[00;37m\]] \\$ \[\e[0m\]"
+parse_git_branch() {
+    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/^* \(.*\)/(\1)/'
+}
+
+export PS1="\[\e[01;37m\]\A\[\e[0m\]\[\e[00;37m\] [\[\e[0m\]\[\e[01;35m\]\u\[\e[0m\]\[\e[00;37m\]:\[\e[0m\]\[\e[01;36m\]\w\[\e[0m\]\[\e[00;37m\]\[\e[01;31m\]\$(parse_git_branch)\[\e[0m\]\[\e[00;37m\]] \\$ \[\e[0m\]"
 export PATH=/usr/local/bin:/usr/bin:/usr/sbin:/bin:/usr/local/games:/usr/games:~/.cabal/bin
 
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 export PATH=$PATH:/home/ruanyf/tools/flow/
-export PATH=~/npm/bin:$PATH
+export PATH=~/npm/bin:~/.node_modules/bin:$PATH
 export PATH=$PATH:~/bin
+export PATH=/home/ruanyf/.node_modules/bin:$PATH
 export JAVA_HOME='/usr/lib/jvm/java-7-openjdk-amd64/'
 
+. ~/.nvm/nvm.sh
 
 # update git
 gup ()
@@ -160,3 +166,15 @@ gup ()
 	git commit -m "$mymessage"
 	git push
 }
+
+# if [ -f `which powerline-daemon` ]; then
+#  powerline-daemon -q
+#  POWERLINE_BASH_CONTINUATION=1
+#  POWERLINE_BASH_SELECT=1
+#  . /usr/share/powerline/bindings/bash/powerline.sh
+# fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+source ~/.nvm/nvm.sh
+nvm use iojs
